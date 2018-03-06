@@ -8,6 +8,7 @@ var
 verbose = false, //set to true to view the progress
 maxVlan = 500, // maximum vlan id (where to stop)
 i       = 10, // minimum vlan id (where to start)
+step    = 1, // increment of X
 iface   = 'bxe0', // your interface (enp0,bge0,bxe1 etc)
 pcp     = '1', // Qos priority (0 to 7)
 doReq   = function(){
@@ -26,7 +27,7 @@ doReq   = function(){
         'save'          : 'Save'
     },function(){
         if(verbose) console.log('Vlan #'+i+'/'+maxVlan+' set.');
-        i++;
+        i+=step;
         doReq();
     });
 };
