@@ -11,7 +11,7 @@ i       = 10, // minimum vlan id (where to start)
 iface   = 'bxe0', // your interface (enp0,bge0,bxe1 etc)
 pcp     = '1', // Qos priority (0 to 7)
 doReq   = function(){
-    if(i==maxVlan){
+    if(i>maxVlan){
         if(verbose) console.log('WE\'RE DONE.');
         return;
     }
