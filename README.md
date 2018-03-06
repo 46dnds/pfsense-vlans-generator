@@ -5,13 +5,17 @@ copy and paste in chrome developper tools (F12), replace your interface and numb
 
 ```javascript
 var
+verbose = false, //set to true to view the progress
 maxVlan = 500, // maximum vlan id (where to stop)
 i       = 10, // minimum vlan id (where to start)
 iface   = 'bxe0', // your interface (enp0,bge0,bxe1 etc)
 pcp     = '1', // Qos priority (0 to 7)
 doReq   = function(){
-    if(i==maxVlan)
+    if(i==maxVlan){
+        if(verbose) console.log('WE\'RE DONE.');
         return;
+    }
+    if(verbose) console.log('Setting vlan #'+i+'/'+maxVlan+'...');
     $.post('/interfaces_vlan_edit.php',{
         '__csrf_magic'  : csrfMagicToken,
         'if'            : iface,
@@ -21,9 +25,9 @@ doReq   = function(){
         'vlanif'        : '',
         'save'          : 'Save'
     },function(){
-
-      i++;
-      doReq();
+        if(verbose) console.log('Vlan #'+i+'/'+maxVlan+' set.');
+        i++;
+        doReq();
     });
 };
 doReq();
